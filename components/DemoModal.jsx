@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, "")}/api/demo`
+  : "/api/demo";
 
 export default function DemoModal({ open, onClose }) {
   const [form, setForm] = useState({
@@ -38,7 +40,7 @@ export default function DemoModal({ open, onClose }) {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch(`${API_URL}/api/demo`, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -47,9 +49,7 @@ export default function DemoModal({ open, onClose }) {
       setStatus("success");
     } catch (err) {
       setStatus("error");
-      setError(
-        "We couldn't send that. Check that the backend server is running, then try again."
-      );
+      setError("Email not sent. Please try again later.");
     }
   };
 
