@@ -53,8 +53,7 @@ export default function VideoModal({ open, onClose }) {
                 2-Minute Overview
               </p>
               <p className="max-w-sm text-sm text-haze">
-                Add your video URL in <code>VideoModal.jsx</code> to play it
-                here.
+                Coming soon!
               </p>
             </div>
           </motion.div>
